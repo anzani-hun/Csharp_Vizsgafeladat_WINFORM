@@ -42,6 +42,7 @@ namespace Csharp_Vizsgafeladat_WINFORM
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Right;
             this.dataGridView1.Location = new System.Drawing.Point(458, 0);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(342, 450);
@@ -56,6 +57,7 @@ namespace Csharp_Vizsgafeladat_WINFORM
             this.button1.TabIndex = 1;
             this.button1.Text = "Ország";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
@@ -76,6 +78,7 @@ namespace Csharp_Vizsgafeladat_WINFORM
             this.button2.TabIndex = 3;
             this.button2.Text = "Összemelet:";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
             // 

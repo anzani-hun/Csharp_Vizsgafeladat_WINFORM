@@ -16,12 +16,15 @@ namespace Csharp_Vizsgafeladat_WINFORM
 
         public partial class Form1 : Form
     {
+        MySqlConnection connection;
+
+
         public Form1()
         {
             InitializeComponent();
 
             
-            MySqlConnection connection;
+            
             string sqlParancs = "SELECT rank, building_name, floors FROM buildings";
 
             connection = new MySqlConnection("server=localhost;userid=root;password=;database=tallest_buildings");
@@ -41,14 +44,42 @@ namespace Csharp_Vizsgafeladat_WINFORM
             bs.DataSource = ds.Tables[0];
             dataGridView1.DataSource = bs;
 
-
-            connection.Close();
+             //a kapcsolatot ne zárjuk le, a vizsgán nem kell
 
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string adat = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+
+            //sql parancs 
+            string sqlParancs = "SELECT city FROM buildings WHERE building_name = '" + adat + "'";
+            MySqlCommand sqlCommand2 = new MySqlCommand(sqlParancs, connection);
+            //egy értéket várunk vissza ezért SCALAR
+            string varos = sqlCommand2.ExecuteScalar().ToString();
+            label1.Text = "Ország: " + varos;
+
+
+
+
+
+
+            //próba kiíratás
+            /*Console.WriteLine(adat);*/
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string sqlParancs = "SELECT COUNT(building_name) FROM buildings WHERE height_m  > 400;";
+            MySqlCommand sqlCommand = new MySqlCommand(sqlParancs, connection);
+            //egy értéket várunk vissza ezért SCALAR
+            string darab = sqlCommand.ExecuteScalar().ToString();
+            label2.Text = "A 400 m-nél magasabb épületek száma: " + darab;
         }
     }
 }
