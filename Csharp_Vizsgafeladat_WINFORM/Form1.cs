@@ -22,11 +22,27 @@ namespace Csharp_Vizsgafeladat_WINFORM
 
             
             MySqlConnection connection;
-            MySqlCommand Command;
-            string sqlParancs = "SELECT rank, buildings, floors FROM buildings WHERE 1";
+            string sqlParancs = "SELECT rank, building_name, floors FROM buildings";
 
             connection = new MySqlConnection("server=localhost;userid=root;password=;database=tallest_buildings");
             connection.Open();
+
+
+            //
+            MySqlDataAdapter adapter = new MySqlDataAdapter(sqlParancs, connection);
+
+            //kell egy fogadó elem:
+            DataSet ds = new DataSet();
+
+            adapter.Fill(ds);
+
+            //a GRIDhez kell, hogy belekerüljön az adat
+            BindingSource bs = new BindingSource();
+            bs.DataSource = ds.Tables[0];
+            dataGridView1.DataSource = bs;
+
+
+            connection.Close();
 
         }
 
